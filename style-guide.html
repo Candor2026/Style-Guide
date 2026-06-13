@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<!--
+  Deploy to GitHub Pages:
+  1. Create a repo or use an existing one
+  2. Add this file as index.html or style-guide.html in the root or /docs folder
+  3. Go to Settings > Pages > set source to main branch / root (or /docs)
+  4. Access at https://yourusername.github.io/reponame/
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Guide | Deep Warm Autumn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F4;
+    --surface: #FFFFFF;
+    --text: #1A1814;
+    --text-2: #6B6560;
+    --text-3: #9E9890;
+    --border: rgba(0,0,0,0.08);
+    --accent: #CC7722;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .section {
+    padding: 56px 0;
+  }
+  .section + .section {
+    border-top: none;
+  }
+  .rule {
+    width: 40px;
+    border-top: 2px solid var(--accent);
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.25;
+  }
+  h2 {
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 0 56px;
+  }
+  .hero-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .hero-accent {
+    width: 4px;
+    height: 60px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-top: 16px;
+    max-width: 520px;
+  }
+
+  /* Sizes */
+  .size-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .size-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .size-tile .k {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+  .size-tile .v {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .size-note {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+  .tag-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 10px;
+  }
+  .tag {
+    background: #F4EEE2;
+    color: #5C3317;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Palette */
+  .group-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .group-sub {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-bottom: 14px;
+  }
+  .swatch-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 64px;
+  }
+  .swatch .dot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+  }
+  .swatch .lbl {
+    font-size: 11px;
+    color: var(--text-2);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill-avoid {
+    background: #FCEBEB;
+    color: #791F1F;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .pill-keep {
+    background: #EAF3DE;
+    color: #27500A;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Outfit formulas */
+  .outfit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .fit-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .block-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .block svg {
+    display: block;
+  }
+  .block .lbl {
+    font-size: 10px;
+    color: var(--text-2);
+    text-align: center;
+    line-height: 1.3;
+    max-width: 56px;
+  }
+  .plus {
+    color: var(--text-3);
+    font-size: 14px;
+    align-self: center;
+    padding-bottom: 16px;
+  }
+  .note {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* Thrift priority list */
+  .prio {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+  .prio .num {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text-3);
+    line-height: 1.2;
+    min-width: 28px;
+  }
+  .prio .icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .prio .title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .prio .body {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* Decision rules */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .rules-grid .card h3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .rules-note {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .rules-grid .pill-row {
+    gap: 6px;
+  }
+  .pattern-body {
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* Fit notes */
+  .fit-card p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+  .fit-card p + p {
+    margin-top: 14px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 56px 0 72px;
+    font-size: 14px;
+    color: var(--text-2);
+  }
+  footer .dot {
+    color: var(--accent);
+    display: block;
+    margin-top: 12px;
+    font-size: 16px;
+  }
+
+  /* Scroll animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    h1 { font-size: 26px; }
+    .outfit-grid { grid-template-columns: 1fr; }
+    .size-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 601px) {
+    .outfit-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 801px) {
+    .rules-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG garment symbol definitions -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="g-tee" viewBox="0 0 40 40">
+      <path d="M13 4 L8 6 L3 13 L9 17 L11 14 L11 36 L29 36 L29 14 L31 17 L37 13 L32 6 L27 4 C27 4 24.5 8 20 8 C15.5 8 13 4 13 4 Z"/>
+    </symbol>
+    <symbol id="g-jacket" viewBox="0 0 40 40">
+      <path d="M13 4 L7 6 L3 14 L9 18 L11 15 L11 37 L29 37 L29 15 L31 18 L37 14 L33 6 L27 4 L23 7 L20 12 L17 7 Z"/>
+      <path d="M20 13 L20 36" stroke="#FAF8F4" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="g-knit" viewBox="0 0 40 40">
+      <path d="M13 4 L6 6 L3 26 L9 27 L10 16 L10 37 L30 37 L30 16 L31 27 L37 26 L34 6 L27 4 C27 4 24.5 8 20 8 C15.5 8 13 4 13 4 Z"/>
+    </symbol>
+    <symbol id="g-pants" viewBox="0 0 40 40">
+      <path d="M12 3 L28 3 L30 37 L22 37 L20 15 L18 37 L10 37 Z"/>
+    </symbol>
+    <symbol id="g-shoe" viewBox="0 0 40 40">
+      <path d="M5 27 C5 23 10 21 14 19 C17 17.5 18.5 13 20 13 L24 13 C24.5 17 29 20 33 22 C35.5 23.5 36 25 36 27 L36 30 L5 30 Z"/>
+    </symbol>
+    <symbol id="g-belt" viewBox="0 0 40 40">
+      <rect x="3" y="16" width="34" height="8" rx="2"/>
+      <rect x="14" y="13.5" width="7" height="13" rx="1.5" fill="none" stroke="#FAF8F4" stroke-width="2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+
+  <!-- 1. Hero -->
+  <section class="section hero fade-in">
+    <div class="eyebrow">Deep Warm Autumn</div>
+    <div class="hero-row">
+      <div class="hero-accent"></div>
+      <h1>Your personal color guide</h1>
+    </div>
+    <p class="hero-sub">A thrift-ready reference built from your coloring. Medium-olive skin, warm bronze tan, salt-and-pepper beard, dark hazel eyes.</p>
+  </section>
+
+  <!-- 2. Your sizes -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">Your sizes</div>
+    <h2>Check the tag, then the tape</h2>
+    <div class="size-grid">
+      <div class="size-tile card fade-in"><div class="k">Chest</div><div class="v">42"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Waist</div><div class="v">33"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Hip</div><div class="v">36"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Leg</div><div class="v">36.5"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Shoulder</div><div class="v">21.5"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Arm</div><div class="v">28.5"</div></div>
+      <div class="size-tile card fade-in"><div class="k">Shoe</div><div class="v">11 US</div></div>
+      <div class="size-tile card fade-in"><div class="k">Jacket</div><div class="v">42R</div></div>
+    </div>
+    <div class="tag-strip">
+      <span class="tag">Tops: L fitted, XL relaxed</span>
+      <span class="tag">Jackets: 42R, size up for layering</span>
+      <span class="tag">Pants: tagged 33, try 32 and 34</span>
+      <span class="tag">Shoes: 11 US, EU 44.5, UK 10</span>
+    </div>
+    <p class="size-note">Tags lie, especially on older garments. Carry a soft tape. Shoulder seam to seam is the one number that matters most: 21.5". For pants, fold the waistband flat and measure across: 16.5" equals your 33" waist. If your 36.5" leg figure is the outseam (waist to hem), look for a 30" to 32" inseam; if it is the inseam itself, hunt for tall or unhemmed lengths.</p>
+  </section>
+
+  <!-- 3. Your palette -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">The palette</div>
+    <h2>What to build around</h2>
+
+    <div class="group-label">Foundation</div>
+    <div class="group-sub">Wear constantly</div>
+    <div class="swatch-row fade-in">
+      <div class="swatch"><div class="dot" style="background:#1C1C1A"></div><div class="lbl">Near black</div></div>
+      <div class="swatch"><div class="dot" style="background:#5C3317"></div><div class="lbl">Dark chocolate</div></div>
+      <div class="swatch"><div class="dot" style="background:#6B6B2A"></div><div class="lbl">Olive</div></div>
+      <div class="swatch"><div class="dot" style="background:#7D5A44"></div><div class="lbl">Warm taupe</div></div>
+      <div class="swatch"><div class="dot" style="background:#F0E2C8"></div><div class="lbl">Ivory</div></div>
+    </div>
+
+    <div class="group-label">Statement</div>
+    <div class="group-sub">Use with intention</div>
+    <div class="swatch-row fade-in">
+      <div class="swatch"><div class="dot" style="background:#8B1A1A"></div><div class="lbl">Burgundy</div></div>
+      <div class="swatch"><div class="dot" style="background:#3B5323"></div><div class="lbl">Forest green</div></div>
+      <div class="swatch"><div class="dot" style="background:#CC7722"></div><div class="lbl">Amber</div></div>
+      <div class="swatch"><div class="dot" style="background:#2F4538"></div><div class="lbl">Dark teal</div></div>
+      <div class="swatch"><div class="dot" style="background:#8B4513"></div><div class="lbl">Burnt sienna</div></div>
+    </div>
+
+    <div class="group-label">Avoid</div>
+    <div class="group-sub">Skip near the face</div>
+    <div class="pill-row fade-in">
+      <span class="pill-avoid">Bright white</span>
+      <span class="pill-avoid">Cool grey</span>
+      <span class="pill-avoid">Royal blue</span>
+      <span class="pill-avoid">Pastels</span>
+      <span class="pill-avoid">Neon</span>
+    </div>
+  </section>
+
+  <!-- 4. Outfit formulas -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">Outfit formulas</div>
+    <h2>Combinations that work</h2>
+    <div class="outfit-grid">
+
+      <div class="card fade-in">
+        <div class="fit-name">The daily anchor</div>
+        <div class="block-row">
+          <div class="block"><svg width="44" height="44" fill="#1C1C1A"><use href="#g-tee"/></svg><div class="lbl">Black tee</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#6B6B2A"><use href="#g-jacket"/></svg><div class="lbl">Olive overshirt</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#5C3317"><use href="#g-pants"/></svg><div class="lbl">Dark chino</div></div>
+        </div>
+        <p class="note">Monochromatic warm column. Works year-round. The olive bridges skin tone and the dark base.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="fit-name">High contrast</div>
+        <div class="block-row">
+          <div class="block"><svg width="44" height="44" fill="#F0E2C8"><use href="#g-tee"/></svg><div class="lbl">Ivory tee</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#8B1A1A"><use href="#g-jacket"/></svg><div class="lbl">Burgundy jacket</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#1C1C1A"><use href="#g-pants"/></svg><div class="lbl">Black trouser</div></div>
+        </div>
+        <p class="note">Uses your natural face contrast. Burgundy near the face pulls warmth from hazel eyes.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="fit-name">Earthy layered</div>
+        <div class="block-row">
+          <div class="block"><svg width="44" height="44" fill="#7D5A44"><use href="#g-knit"/></svg><div class="lbl">Taupe henley</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#3B5323"><use href="#g-jacket"/></svg><div class="lbl">Forest jacket</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#5C3317"><use href="#g-pants"/></svg><div class="lbl">Brown denim</div></div>
+        </div>
+        <p class="note">All warm, all muted. Layers read as intentional. Good for casual settings.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="fit-name">Warm denim</div>
+        <div class="block-row">
+          <div class="block"><svg width="44" height="44" fill="#1C1C1A"><use href="#g-tee"/></svg><div class="lbl">Black tee</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#7B98B2"><use href="#g-jacket"/></svg><div class="lbl">Washed denim</div></div>
+          <span class="plus">+</span>
+          <div class="block"><svg width="44" height="44" fill="#1C1C1A"><use href="#g-pants"/></svg><div class="lbl">Dark jeans</div></div>
+        </div>
+        <p class="note">Washed (not bright) blue denim reads warm enough for this palette. Never crisp blue.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Thrift priority list -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">Intentional thrifting</div>
+    <h2>What to look for, in order</h2>
+
+    <div class="prio fade-in">
+      <div class="num">1</div>
+      <svg class="icon" width="28" height="28" fill="#3B5323"><use href="#g-jacket"/></svg>
+      <div>
+        <div class="title">Structured overshirt or chore coat</div>
+        <div class="body">In olive, forest green, or dark brown. Workwear brands (Dickies, Carhartt, utility labels) end up at thrift stores consistently. Check both jacket and shirt sections. Fabric: cotton canvas, twill, or corduroy. Avoid nylon or synthetic shell.</div>
+      </div>
+    </div>
+
+    <div class="prio fade-in">
+      <div class="num">2</div>
+      <svg class="icon" width="28" height="28" fill="#1C1C1A"><use href="#g-tee"/></svg>
+      <div>
+        <div class="title">Heavyweight cotton tees</div>
+        <div class="body">In near-black, chocolate, ivory, or burnt sienna. Look for 200gsm+ weight. Plain and unfussy reads better than graphic prints near the face. Hanes Beefy, Fruit of the Loom Heavy, or workwear undershirts. Supply is deep.</div>
+      </div>
+    </div>
+
+    <div class="prio fade-in">
+      <div class="num">3</div>
+      <svg class="icon" width="28" height="28" fill="#26262E"><use href="#g-pants"/></svg>
+      <div>
+        <div class="title">Dark denim, straight or relaxed fit</div>
+        <div class="body">Raw indigo or very dark wash only. Not medium or light wash. Not skinny, not distressed. Check waist and rise before length. Shortening is easy, fixing waist is not.</div>
+      </div>
+    </div>
+
+    <div class="prio fade-in">
+      <div class="num">4</div>
+      <svg class="icon" width="28" height="28" fill="#8B1A1A"><use href="#g-knit"/></svg>
+      <div>
+        <div class="title">Burgundy or dark teal knit</div>
+        <div class="body">Crewneck or zip. Merino or cotton blend preferred. Thrift stores get corporate knitwear in dark tones. Check color, not logo. A plain burgundy crewneck in good cotton is worth more than a branded one in a bad color.</div>
+      </div>
+    </div>
+
+    <div class="prio fade-in">
+      <div class="num">5</div>
+      <svg class="icon" width="28" height="28" fill="#8B4513"><use href="#g-shoe"/></svg>
+      <div>
+        <div class="title">Leather or suede belt and shoes in tan, cognac, or dark brown</div>
+        <div class="body">Matte or semi-matte leather. Thrift stores have leather belts consistently and occasionally footwear. Skip patent or overly shiny finishes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. At-the-rack decision rules -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">At the store</div>
+    <h2>Decide in seconds</h2>
+    <div class="rules-grid">
+
+      <div class="card fade-in">
+        <h3>Keep if all three are true</h3>
+        <div class="pill-row">
+          <span class="pill-keep">Color fits the palette</span>
+          <span class="pill-keep">Fabric is natural or substantial</span>
+          <span class="pill-keep">Fit works at the shoulders</span>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Put back if any of these</h3>
+        <div class="pill-row">
+          <span class="pill-avoid">Cool or bright color</span>
+          <span class="pill-avoid">Polyester or shiny synthetic</span>
+          <span class="pill-avoid">Heavy logo or branding</span>
+          <span class="pill-avoid">Shoulder seam off</span>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <h3>Pattern rules</h3>
+        <p class="pattern-body">Solid or near-solid for anything at face level (tees, crewnecks, collared shirts). Pattern works on a third layer only if the pattern uses palette-compatible colors. A dark green tartan with brown and ochre threads works. A red and white buffalo check does not.</p>
+      </div>
+
+    </div>
+    <p class="rules-note">Shoulder seams cannot be altered affordably. If shoulders fit and color is right, that is 80% of the decision.</p>
+  </section>
+
+  <!-- 7. Fit notes -->
+  <section class="section fade-in">
+    <div class="rule"></div>
+    <div class="eyebrow">Fit</div>
+    <h2>For your build</h2>
+    <div class="card fit-card fade-in">
+      <p>Your shoulders and chest carry width. A relaxed fit in the torso reads cleaner than fitted for most casual contexts. Fitted tees work when the color is strong enough to anchor the look (black, burgundy). Avoid fitted in pale or muted tones.</p>
+      <p>For outerwear, go one size up from what fits your chest to allow layering and maintain a clean line at the shoulder. The tattoo on your right shoulder reads as a design element. Dark-on-dark layering (forest green sleeve, dark teal jacket) works unusually well because of the contrast between dark ink and warm skin.</p>
+    </div>
+  </section>
+
+  <!-- 8. Footer -->
+  <footer class="fade-in">
+    Deep Warm Autumn palette guide. Built for intentional thrifting.
+    <span class="dot">&bull;</span>
+  </footer>
+
+</main>
+
+<script>
+  // Scroll-triggered fade-in
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(function (el) {
+    observer.observe(el);
+  });
+
+  // Stagger cards within their parent grid by index
+  document.querySelectorAll('.outfit-grid, .rules-grid, .size-grid').forEach(function (grid) {
+    Array.prototype.forEach.call(grid.children, function (card, i) {
+      card.style.transitionDelay = (i * 80) + 'ms';
+    });
+  });
+</script>
+
+</body>
+</html>
