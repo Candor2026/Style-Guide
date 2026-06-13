@@ -328,6 +328,96 @@
     font-size: 16px;
   }
 
+  /* Sticky size bar */
+  .sizebar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(26,24,20,0.92);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #F0E2C8;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 8px 12px;
+    z-index: 90;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sizebar.show { transform: translateY(0); }
+  .sizebar span { color: var(--accent); }
+
+  /* Anchor nav */
+  .anchor-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .anchor-nav a {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+  }
+  .anchor-nav a:active { background: #F4EEE2; }
+  section[id] { scroll-margin-top: 48px; }
+  html { scroll-behavior: smooth; }
+
+  /* Fullscreen color compare */
+  .swatch .dot, .block svg { cursor: pointer; }
+  #color-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 48px;
+  }
+  #color-overlay.open { display: flex; }
+  #color-overlay .info {
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 20px;
+  }
+  .compare-hint {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 4px;
+  }
+
+  /* Owned checklist */
+  .own {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-3);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    padding-top: 4px;
+  }
+  .own input {
+    width: 18px;
+    height: 18px;
+    accent-color: #3B5323;
+    cursor: pointer;
+  }
+  .prio.owned { opacity: 0.45; }
+  .prio.owned .title { text-decoration: line-through; }
+
   /* Scroll animation */
   .fade-in {
     opacity: 0;
@@ -355,6 +445,16 @@
 </style>
 </head>
 <body>
+
+<!-- Sticky size bar -->
+<div class="sizebar" id="sizebar">
+  <span>42</span> chest &middot; <span>33</span> waist &middot; <span>21.5</span> shoulder &middot; <span>36.5</span> leg &middot; <span>11</span> US
+</div>
+
+<!-- Fullscreen color compare overlay -->
+<div id="color-overlay">
+  <div class="info"></div>
+</div>
 
 <!-- SVG garment symbol definitions -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -392,10 +492,17 @@
       <h1>Your personal color guide</h1>
     </div>
     <p class="hero-sub">A thrift-ready reference built from your coloring. Medium-olive skin, warm bronze tan, salt-and-pepper beard, dark hazel eyes.</p>
+    <nav class="anchor-nav">
+      <a href="#sizes">Sizes</a>
+      <a href="#palette">Palette</a>
+      <a href="#formulas">Formulas</a>
+      <a href="#priorities">Priorities</a>
+      <a href="#rules">Rules</a>
+    </nav>
   </section>
 
   <!-- 2. Your sizes -->
-  <section class="section fade-in">
+  <section class="section fade-in" id="sizes">
     <div class="rule"></div>
     <div class="eyebrow">Your sizes</div>
     <h2>Check the tag, then the tape</h2>
@@ -419,10 +526,11 @@
   </section>
 
   <!-- 3. Your palette -->
-  <section class="section fade-in">
+  <section class="section fade-in" id="palette">
     <div class="rule"></div>
     <div class="eyebrow">The palette</div>
     <h2>What to build around</h2>
+    <p class="compare-hint">Tap any color to fill the screen, then hold your phone against the garment to compare. Tap again to close.</p>
 
     <div class="group-label">Foundation</div>
     <div class="group-sub">Wear constantly</div>
@@ -456,7 +564,7 @@
   </section>
 
   <!-- 4. Outfit formulas -->
-  <section class="section fade-in">
+  <section class="section fade-in" id="formulas">
     <div class="rule"></div>
     <div class="eyebrow">Outfit formulas</div>
     <h2>Combinations that work</h2>
@@ -514,7 +622,7 @@
   </section>
 
   <!-- 5. Thrift priority list -->
-  <section class="section fade-in">
+  <section class="section fade-in" id="priorities">
     <div class="rule"></div>
     <div class="eyebrow">Intentional thrifting</div>
     <h2>What to look for, in order</h2>
@@ -526,6 +634,7 @@
         <div class="title">Structured overshirt or chore coat</div>
         <div class="body">In olive, forest green, or dark brown. Workwear brands (Dickies, Carhartt, utility labels) end up at thrift stores consistently. Check both jacket and shirt sections. Fabric: cotton canvas, twill, or corduroy. Avoid nylon or synthetic shell.</div>
       </div>
+      <label class="own"><input type="checkbox" data-own="1">Found</label>
     </div>
 
     <div class="prio fade-in">
@@ -535,6 +644,7 @@
         <div class="title">Heavyweight cotton tees</div>
         <div class="body">In near-black, chocolate, ivory, or burnt sienna. Look for 200gsm+ weight. Plain and unfussy reads better than graphic prints near the face. Hanes Beefy, Fruit of the Loom Heavy, or workwear undershirts. Supply is deep.</div>
       </div>
+      <label class="own"><input type="checkbox" data-own="2">Found</label>
     </div>
 
     <div class="prio fade-in">
@@ -544,6 +654,7 @@
         <div class="title">Dark denim, straight or relaxed fit</div>
         <div class="body">Raw indigo or very dark wash only. Not medium or light wash. Not skinny, not distressed. Check waist and rise before length. Shortening is easy, fixing waist is not.</div>
       </div>
+      <label class="own"><input type="checkbox" data-own="3">Found</label>
     </div>
 
     <div class="prio fade-in">
@@ -553,6 +664,7 @@
         <div class="title">Burgundy or dark teal knit</div>
         <div class="body">Crewneck or zip. Merino or cotton blend preferred. Thrift stores get corporate knitwear in dark tones. Check color, not logo. A plain burgundy crewneck in good cotton is worth more than a branded one in a bad color.</div>
       </div>
+      <label class="own"><input type="checkbox" data-own="4">Found</label>
     </div>
 
     <div class="prio fade-in">
@@ -562,11 +674,12 @@
         <div class="title">Leather or suede belt and shoes in tan, cognac, or dark brown</div>
         <div class="body">Matte or semi-matte leather. Thrift stores have leather belts consistently and occasionally footwear. Skip patent or overly shiny finishes.</div>
       </div>
+      <label class="own"><input type="checkbox" data-own="5">Found</label>
     </div>
   </section>
 
   <!-- 6. At-the-rack decision rules -->
-  <section class="section fade-in">
+  <section class="section fade-in" id="rules">
     <div class="rule"></div>
     <div class="eyebrow">At the store</div>
     <h2>Decide in seconds</h2>
@@ -598,6 +711,7 @@
 
     </div>
     <p class="rules-note">Shoulder seams cannot be altered affordably. If shoulders fit and color is right, that is 80% of the decision.</p>
+    <p class="rules-note">Lighting check: fluorescent store lighting shifts warm colors cooler and mutes saturation. When a color is borderline, walk it to a window or shine your phone flashlight on it before deciding. Use the tap-to-compare swatches above under that same light.</p>
   </section>
 
   <!-- 7. Fit notes -->
@@ -638,6 +752,62 @@
   document.querySelectorAll('.outfit-grid, .rules-grid, .size-grid').forEach(function (grid) {
     Array.prototype.forEach.call(grid.children, function (card, i) {
       card.style.transitionDelay = (i * 80) + 'ms';
+    });
+  });
+
+  // Sticky size bar: show after scrolling past the hero
+  var sizebar = document.getElementById('sizebar');
+  var hero = document.querySelector('.hero');
+  window.addEventListener('scroll', function () {
+    var past = window.scrollY > hero.offsetTop + hero.offsetHeight;
+    sizebar.classList.toggle('show', past);
+  }, { passive: true });
+
+  // Tap a color to fill the screen for in-store comparison
+  var overlay = document.getElementById('color-overlay');
+  var overlayInfo = overlay.querySelector('.info');
+  function openCompare(color, label) {
+    overlay.style.background = color;
+    overlayInfo.textContent = label + '  ' + color + '  (tap to close)';
+    overlay.classList.add('open');
+  }
+  overlay.addEventListener('click', function () {
+    overlay.classList.remove('open');
+  });
+  document.querySelectorAll('.swatch').forEach(function (sw) {
+    sw.addEventListener('click', function () {
+      var dot = sw.querySelector('.dot');
+      var lbl = sw.querySelector('.lbl');
+      openCompare(rgbToHex(dot.style.backgroundColor), lbl ? lbl.textContent : '');
+    });
+  });
+  document.querySelectorAll('.block').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var svg = b.querySelector('svg');
+      var lbl = b.querySelector('.lbl');
+      openCompare(svg.getAttribute('fill'), lbl ? lbl.textContent : '');
+    });
+  });
+  function rgbToHex(rgb) {
+    var m = rgb.match(/\d+/g);
+    if (!m) return rgb;
+    return '#' + m.slice(0, 3).map(function (n) {
+      return ('0' + parseInt(n, 10).toString(16)).slice(-2).toUpperCase();
+    }).join('');
+  }
+
+  // Owned checklist, persisted in localStorage
+  var OWN_KEY = 'thrift-owned';
+  var owned = {};
+  try { owned = JSON.parse(localStorage.getItem(OWN_KEY)) || {}; } catch (e) {}
+  document.querySelectorAll('.own input').forEach(function (cb) {
+    var id = cb.getAttribute('data-own');
+    cb.checked = !!owned[id];
+    cb.closest('.prio').classList.toggle('owned', cb.checked);
+    cb.addEventListener('change', function () {
+      owned[id] = cb.checked;
+      try { localStorage.setItem(OWN_KEY, JSON.stringify(owned)); } catch (e) {}
+      cb.closest('.prio').classList.toggle('owned', cb.checked);
     });
   });
 </script>
